@@ -4,7 +4,7 @@ import { Layout } from './Layout';
 export const AuthLayout = (props) => {
     return (
         <Layout>
-            <div>
+            <div style={{position: "relative"}}>
                 <img src="/assets/onboarding/shape.svg" />
                 <div className="welcome-label">Welcome</div>
             </div>
