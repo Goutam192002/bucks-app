@@ -1,0 +1,48 @@
+.card-details-container {
+    padding: 28px 0px;
+}
+
+.card {
+    background: linear-gradient(149.26deg, #BF4DF5 -13.65%, #271032 51.62%, #BF4DF5 109.7%);
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.65);
+    border-radius: 20px;
+
+    width: 200px;
+    height: 280px;
+
+    padding: 24px 18px 14px 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.chip-container {
+    margin-top: 15px;
+}
+
+.card-holder-name {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 8px;
+}
+
+.transparent-button {
+    background: none;
+    border: none;
+
+    color: white;
+
+    width: 200px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 24px;
+    margin-bottom: 12px;
+}

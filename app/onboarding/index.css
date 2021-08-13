@@ -1,0 +1,16 @@
+.onboarding-container {
+    background-color: #242A38;
+    height: 100%;
+    color: white;
+}
+
+.welcome-label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 44px;
+
+    position: absolute;
+    left: 28px;
+    top: 28px;
+}

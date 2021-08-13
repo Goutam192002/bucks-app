@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Bucks App - Disburse to your employee</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    </head>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        form > * {
+            margin-bottom: 15px;
+        }
+    </style>
+    <body class="container">
+        <h4 class="text-center m-5">Disburse money to employee</h1>
+
+        <form method="POST" action="/api/client/disburse">
+            <select class="form-select" name="clientId" placeholder="Select a company" required>
+                <option value="610f93bc62f8f8fabf24cc3d">OLA</option>
+                <option value="610f942262f8f8fabf24cc3e">Uber</option> 
+            </select>
+            <input class="form-control" name="employeeId" placeholder="Enter the employee ID" required>
+            <input class="form-control" name="amount" type="number" placeholder="Enter the amount" required>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </body>
+</html>

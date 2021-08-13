@@ -1,0 +1,24 @@
+.input-group {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid #FFFFFF;
+    border-radius: 100px;
+    padding: 12px;
+    margin-bottom: 18px;
+}
+
+.mobile-form {
+    padding: 8px 24px;
+}
+
+.mobile-input-label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 14px;
+}
+
+::placeholder {
+    color: white;
+    opacity: 0.2;
+}

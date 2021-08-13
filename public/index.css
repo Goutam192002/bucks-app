@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box !important;
+}
+
+html, body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0 !important;
+    min-height: 100%;
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+.bg-primary {
+    background: #242A38;
+    color: white !important;
+}
+
+.container {
+    height: 100%;
+    max-height: 100%;
+    padding: 48px 18px 12px 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-navigation {
+    background: linear-gradient(94.08deg, #303f70 10.4%, #533671 87.18%);
+    backdrop-filter: blur(4px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 100px;
+    display: flex;
+}
+
+.nav-button {
+    flex: 1;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 12px 0px;
+}
+
+.nav-button > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nav-button-selected {
+    width: 145px;
+    background: #74779b;
+    border-radius: 100px;
+    backdrop-filter: blur(4px);
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+    padding: 12px 18px;
+}
+
+.nav-button-selected :first-child {
+    margin-right: 4px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.flex-auto {
+    flex: 1
+}
+
+.align-center  {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+input:focus {
+    outline: none;
+}
+
+input {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: white;
+    background: none;
+    border: none;    
+}
+
+.btn-primary {
+    width: 100%;
+    border-radius: 100px;
+    background: #BF4DF5;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+    border: none;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+
+    padding: 12px 0;
+}
+
+.btn-primary:disabled {
+    opacity: 0.3;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.align-end {
+    align-items: flex-end;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mobile-container {
+    height: 100%;
+}
+
+.mobile-frame {
+    height: 100%;
+}
+
+@media only screen and (min-width: 460px) {
+    .mobile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 100%;
+    }
+
+    .mobile-frame {
+        width: 375px;
+        height: 780px;
+
+        border: 8px solid;
+        box-shadow: 2px 4px 4px #A373D3, -2px -4px 4px #a868ec;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+}

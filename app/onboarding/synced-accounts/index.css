@@ -1,0 +1,41 @@
+.spinner {
+    height: 180px;
+    width: 180px;
+    margin-right: 4px;
+    border-width: 20px;
+    border-style: solid;
+    border-image: initial;
+    border-radius: 50%;
+    border-color: #BF4DF5 transparent #BF4DF5 #4D72F5  !important;
+    animation: 1s linear 0s infinite normal none running rotate;
+    margin-bottom: 30px;
+}
+  
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.synced-accounts-label {
+    margin-top: 14px;
+    margin-bottom: 14px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.client-container {  
+    display: inline-block;  
+    background: #4E596F;
+    border-radius: 20px;
+    padding: 12px;
+}
+
+.synced-accounts-container {
+    margin-bottom: 30px;
+}

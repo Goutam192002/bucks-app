@@ -1,0 +1,124 @@
+.balance-container {
+    background: linear-gradient(112.23deg, rgba(191, 77, 245, 0.3) 12.4%, rgba(191, 77, 245, 0) 109.21%);
+    border-radius: 20px;
+    padding: 24px 34px;
+}
+
+.home-container {
+    padding: 30px 0;
+}
+
+.your-balance-label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.balance-amount {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 44px;
+}
+
+.summary-container {
+    flex: 1;
+    background: linear-gradient(112.23deg, rgba(191, 77, 245, 0.3) 12.4%, rgba(191, 77, 245, 0) 109.21%);
+    border-radius: 20px;
+    padding: 40px 16px;
+}
+
+.summary-row {
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.summary-row :first-child {
+    margin-right: 14px;
+}
+
+.summary-type-label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.summary-amount {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.transactions-label {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.see-all-label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.transaction-group-label {
+    margin: 10px 0;
+}
+
+.transaction-row {
+    margin-top: 8px;
+}
+
+.transaction-row > * {
+    margin-right: 8px;
+}
+
+.transaction-amount {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.transaction-summary {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.transaction-timestamp {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.transaction-tag {
+    background: rgba(110, 236, 90, 0.6);
+    border-radius: 2px;
+    padding: 4px 18px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #ABEAA1;
+}
+
+.transaction-details > * {
+    margin-bottom: 4px;
+}
+
+.transactions-container {
+    flex: 1;
+    max-height: 80px;
+    overflow-y: scroll;
+}
