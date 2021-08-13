@@ -11,6 +11,7 @@ const clientRouter = require("./core/routes/client");
 const mockClient = require("./clients");
 
 const mongoUri = process.env.MONGODB_URI || "mongodb://localhost/buckit";
+
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -35,4 +36,5 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-app.listen(3000);
+const port = process.env.PORT || 3000;
+app.listen(port);
