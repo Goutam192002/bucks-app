@@ -24,6 +24,16 @@ NOTE:
   
 - Refresh the gig worker app again and balance, transactions should be updated.
 
+
+## How to run this project?
+
+- Clone this repo.
+- Open up your terminal and run this command `cd bucks-app`
+- Run `npm install`
+- In one tab, run `node index.js` , this command starts the nodejs server
+- In seperate tab run `webapck`, this command builds the react app. If you want to run in watch mode add option `--watch`
+- In browser, browse to http://localhost:3000
+
 Cheers🍻
 
 
