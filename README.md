@@ -35,3 +35,10 @@ NOTE:
 Cheers🍻
 
 
+## Why we used what we used?
+
+Web - We wanted to able to demo something without having the user to install an APK
+MongoDB - Say goodbye to painful migrations. We had to change the schemas frequenty because we didn't know how to go about it.
+Node.js - Just one language for both backend and frontend..minimal complexity
+
+
