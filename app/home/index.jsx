@@ -22,7 +22,7 @@ export const HomeView = () => {
             <div className="d-flex justify-between balance-container">
                 <div>
                     <div className="your-balance-label">Amount you can spend</div>
-                    <div className="balance-amount">₹ {summary.balance}</div>
+                    <div className="balance-amount">₹ {summary.balance/100}</div>
                 </div>
                 <img src="/assets/money.png" />
             </div>
@@ -33,7 +33,7 @@ export const HomeView = () => {
                         income => (
                             <div className="d-flex flex-column summary-container">
                                 <div className="sumamry-amount">{income.client.companyName}</div>
-                                <div className="summary-amount">₹ {income.income}</div>
+                                <div className="summary-amount">₹ {income.income/100}</div>
                             </div>        
                         )
                     )
@@ -53,7 +53,7 @@ export const HomeView = () => {
                                     <div className="transaction-timestamp">{new Date(transaction.timestamp).toDateString()}</div>
                                     <div className="transaction-tag">Received</div>
                                 </div>
-                                <div className="transaction-amount">Rs. {transaction.amount}</div>
+                                <div className="transaction-amount">Rs. {transaction.amount/100}</div>
                             </div>    
                         )
                     )
