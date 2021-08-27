@@ -4,10 +4,8 @@ Demo Link: https://bucks-app.herokuapp.com/
 
 A pre-paid card for gig workers. Payments are made after every ride/task completed.
 
-## Architecture
-![alt text](https://github.com/Goutam192002/bucks-app/raw/master/architecture.png "Architecture")
-
-
+## How does this work?
+Head over to: https://docs.google.com/presentation/d/1yTTV94cpBeL7XJQanr1nK8AfEg0iZtKy_5LqNlgJaY0/edit?usp=sharing
 
 ## How to test this project?
 
