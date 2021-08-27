@@ -1,11 +1,12 @@
 const express = require("express");
 const router = new express.Router();
+const { ObjectId } = require("mongoose").Types;
 
 const fusionService = require("../services/fusion");
 
 const { User } = require("../models/user");
 const { Transaction } = require("../models/transaction");
-const { Employee, Client, Disbursal } = require("../models/client");
+const { Employee, Client } = require("../models/client");
 
 router.post('/submit-kyc', async (req, res) => {
     const userId = req.body.userId || req.user.id;
@@ -25,7 +26,8 @@ router.post('/submit-kyc', async (req, res) => {
         individualID: application.individualID,
         name: req.body.firstName,
         cardID: resourceDetails.formFactors[0].formFactorID,
-        accountID: bundle.accounts[0].accountID
+        accountID: bundle.accounts[0].accountID,
+        bundleID: bundle.accounts[0].bundleID
     }, { new: true, });
     res.send(user);
 });
@@ -33,12 +35,34 @@ router.post('/submit-kyc', async (req, res) => {
 router.post('/summary', async (req, res) => {
     const userId = req.body.userId || req.user.id;
 
-    const incomes = await Disbursal.aggregate([
+    const incomes = await User.aggregate([
       {
+        '$match': {
+          '_id': new ObjectId(userId)
+        }
+      }, {
+        '$lookup': {
+          'from': 'employees', 
+          'localField': '_id', 
+          'foreignField': 'userId', 
+          'as': 'source'
+        }
+      }, {
+        '$unwind': '$source'
+      }, {
+        '$lookup': {
+          'from': 'disbursals', 
+          'localField': 'source._id', 
+          'foreignField': 'employeeId', 
+          'as': 'history'
+        }
+      }, {
+        '$unwind': '$history'
+      }, {
         '$group': {
-          '_id': '$clientId', 
+          '_id': '$history.clientId', 
           'income': {
-            '$sum': '$amount'
+            '$sum': '$history.amount'
           }
         }
       }, {
@@ -46,7 +70,7 @@ router.post('/summary', async (req, res) => {
           'from': 'clients', 
           'localField': '_id', 
           'foreignField': '_id', 
-          'as': 'clients'
+          'as': 'client'
         }
       }, {
         '$replaceWith': {
@@ -55,7 +79,7 @@ router.post('/summary', async (req, res) => {
             '$mergeObjects': [
               {
                 '$arrayElemAt': [
-                  '$clients', 0
+                  '$client', 0
                 ]
               }
             ]

@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const usersRouter = require("./core/routes/users");
 const authRouter = require("./core/routes/auth");
 const clientRouter = require("./core/routes/client");
+const webhookRouter = require("./core/routes/webhooks");
 
 const mockClient = require("./clients");
 
@@ -28,6 +29,7 @@ app.use(express.static("public"));
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/client", clientRouter);
+app.use("/api/webhooks", webhookRouter);
 
 // Mock client APIs
 app.use("/mock/client", mockClient);

@@ -62,8 +62,35 @@ async function fetchResourceDetails(resourceID) {
 }
 
 async function fetchCardDetails(formFactorID) {
-    console.log(formFactorID);
     const response = await axios.get(`https://fusion.preprod.zeta.in/api/v1/ifi/140793/cards/${formFactorID}`, config);
+    return response.data;
+}
+
+async function fetchAccountBalance(accountID) {
+    const response = await axios.get(`https://fusion.preprod.zeta.in/api/v1/ifi/140793/accounts/${accountID}/balance`, config);
+    return response.data;
+}
+
+async function resumePayment({ resourceID, paymentID, paymentRequestId, response }) {
+    const resumeResponse = await axios.post(`https://fusion.preprod.zeta.in/api/v1/ifi/140793/resources/${resourceID}/payments/${paymentID}/resume`, {
+        paymentRequestId,
+        actionName: "PAYMENT_REQUESTED",
+        response
+    }, config);
+    return resumeResponse.data;
+}
+
+async function transfer({ amount, creditAccountID }) {
+    const response = await axios.post("https://fusion.preprod.zeta.in/api/v1/ifi/140793/transfers", {
+        "amount": {
+            "currency" : "INR",
+            "amount" : amount,
+        },
+        "transferCode": "A2A_VBOPayout-VBO2U_AUTH",
+        "debitAccountID": "b492841a-6310-4754-a2c5-cf1467bbc44b",
+        "creditAccountID": creditAccountID,
+        "remarks": "Fund account for transaction"
+      }, config);
     return response.data;
 }
 
@@ -72,5 +99,8 @@ module.exports = {
     issueBundle, 
     fetchAccountHolderInfo,
     fetchResourceDetails,
-    fetchCardDetails
+    fetchCardDetails,
+    fetchAccountBalance,
+    resumePayment,
+    transfer
 };

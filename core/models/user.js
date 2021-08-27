@@ -9,6 +9,7 @@ const userSchema = new Schema({
     individualID: String,
     cardID: String,
     accountID: String,
+    bundleID: String,
     mobile_verified: {
         type: Boolean,
         default: false
