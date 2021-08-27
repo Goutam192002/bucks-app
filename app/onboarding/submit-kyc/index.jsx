@@ -11,19 +11,21 @@ export const KycFormView = () => {
     const [form, setForm] = useState({
         name: '',
         dob: '',
-        proof_of_identity: 'pan',
-        proof_no: ''
+        gender: 'MALE',
+        pan: ''
     });
     const [dirty, setDirty] = useState({
         name: false,
         dob: false,
-        proof_no: false
+        pan: false,
+        gender: true,
     });
     const [errors, setErrors] = useState({
         name: '',
         dob: '',
         proof_of_identity: '',
-        proof_no: ''
+        pan: '',
+        gender: ''
     });
 
     const dispatch = useDispatch();
@@ -76,8 +78,8 @@ export const KycFormView = () => {
             errorUpdates["dob"] = isDobValid(form.dob) ? '' : 'DOB Must be in the format DD/MM/YYYY';
         }
 
-        if (dirty["proof_no"]) {
-            errorUpdates["proof_no"] = form.proof_no ? '': 'Please enter a valid proof';
+        if (dirty["pan"]) {
+            errorUpdates["pan"] = form.pan ? '': 'Please enter a valid PAN Number';
         }
 
         setErrors(errorUpdates);
@@ -103,7 +105,9 @@ export const KycFormView = () => {
                 userId,
                 mobile,
                 dob: form.dob,
-                name: form.name
+                name: form.name,
+                pan: form.pan,
+                gender: form.gender
             })
         );
     }
@@ -126,21 +130,21 @@ export const KycFormView = () => {
                 </div>
 
                 <div className="form-group">
-                    <div className="form-label">Proof Of Identity</div>
+                    <div className="form-label">Gender</div>
                     <div className="d-flex radio-input">
-                        <input type="radio" name="proof" value="aadhar" checked={form.proof_of_identity === "aadhar"} onChange={onChange('proof_of_identity')} />
-                        <div>Aadhar</div>
+                        <input type="radio" name="proof" value="MALE" checked={form.gender === "MALE"} onChange={onChange('gender')} />
+                        <div>Male</div>
                     </div>
                     <div className="d-flex radio-input">
-                        <input type="radio" name="proof" value="pan" checked={form.proof_of_identity === "pan"} onChange={onChange('proof_of_identity')} />
-                        <div>PAN Card</div>
+                        <input type="radio" name="proof" value="FEMALE" checked={form.gender === "FEMALE"} onChange={onChange('gender')} />
+                        <div>Female</div>
                     </div>
                 </div>
 
                 <div className="form-group">
-                    <div className="form-label">Aadhar No. / PAN</div>
-                    <input type="text" className={`input-field ${errors.proof_no && "input-invalid"}`} placeholder="Enter your Aadhaar / PAN" value={form.proof_no} onChange={onChange('proof_no')} />
-                    <span className="error-feedback">{errors.proof_no}</span>
+                    <div className="form-label">PAN</div>
+                    <input type="text" className={`input-field ${errors.pan && "input-invalid"}`} placeholder="Enter your PAN" value={form.pan} onChange={onChange('pan')} />
+                    <span className="error-feedback">{errors.pan}</span>
                 </div>
 
                 <button className="btn-primary" disabled={!valid}>Done</button>

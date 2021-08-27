@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initiateAuth } from "./thunks/auth";
-import { getLinkedAccounts, getSummary, getTransactions, submitKyc } from "./thunks/user";
+import { fetchCardDetails, getLinkedAccounts, getSummary, getTransactions, submitKyc } from "./thunks/user";
 
 const initialState = {
     loading: 'idle',
@@ -16,6 +16,10 @@ const initialState = {
     linked_accounts: {
         loading: 'idle',
         entity: []
+    },
+    card: {
+        loading: 'false',
+        entity: {}
     }
 };
 
@@ -59,7 +63,16 @@ export const userSlice = createSlice({
         builder.addCase(getLinkedAccounts.fulfilled, (state, action) => {
             state.linked_accounts.loading = 'fulfilled';
             state.linked_accounts.entity = action.payload;
-        })
+        });
+
+        builder.addCase(fetchCardDetails.pending, (state, action) => {
+            state.card.loading = 'loading';
+        });
+
+        builder.addCase(fetchCardDetails.fulfilled, (state, action) => {
+            state.card.loading = 'fulfilled';
+            state.card.entity = action.payload;
+        });
     }
 });
 

@@ -1,20 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const submitKyc = createAsyncThunk('user/submit-kyc', async ({ userId, mobile, dob, name }, _) => {
-    const [dayOfMonth, month, year] = dob.split('/');
+export const submitKyc = createAsyncThunk('user/submit-kyc', async ({ userId, mobile, dob, name, gender, pan }, _) => {
+    const [day, month, year] = dob.split('/');
     const response = await axios.post('/api/users/submit-kyc', {
         userId,
         mobile,
         dob: {
-            dayOfMonth,
+            day,
             month,
             year
         },
-        salutation: 'Mr.',
         firstName: name,
-        lastName: 'Test',
-        gender: 'Male'
+        gender: gender,
+        pan: pan
     });
     return response.data;
 });
@@ -34,3 +33,7 @@ export const getLinkedAccounts = createAsyncThunk('user/linked-accounts', async 
     return response.data;
 });
 
+export const fetchCardDetails = createAsyncThunk('user/card-details', async(userId, _) => {
+    const response = await axios.post('/api/users/card-details', { userId });
+    return response.data;
+});

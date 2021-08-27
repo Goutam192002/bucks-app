@@ -5,6 +5,6 @@ import UserReducer from "./core/user";
 export const store = configureStore({
     reducer: {
         auth: AuthReducer,
-        user: UserReducer
+        user: UserReducer,
     }
 });

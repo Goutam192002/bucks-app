@@ -6,9 +6,13 @@ export const initiateAuth = createAsyncThunk('auth/initiate', async (mobile, _) 
     return response.data;
 });
 
-export const verify = createAsyncThunk('auth/verify', async ({mobile, code}, _) => {
-    const response = await axios.post('/api/auth/verify', { mobile, code });
-    return response.data;    
+export const verify = createAsyncThunk('auth/verify', async ({mobile, code}, { rejectWithValue }) => {
+    try {
+        const response = await axios.post('/api/auth/verify', { mobile, code });
+        return response.data;                
+    } catch(e) {
+        return rejectWithValue(e.response.data.message);
+    }
 });
 
 export const getNextRoute = createAsyncThunk('user/next-route', async (userId, _) => {

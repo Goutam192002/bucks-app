@@ -13,6 +13,8 @@ export const VerifyMobileView = () => {
 
     const mobile = useSelector(state => state.auth.mobile);
     const next = useSelector(state => state.auth.next);
+    const status = useSelector(state => state.auth.loading);
+    const error = useSelector(state => state.auth.error);
 
     const otpContainer = createRef();
     const history = useHistory();
@@ -64,15 +66,24 @@ export const VerifyMobileView = () => {
 
     const submitOtp = (e) => {
         e.preventDefault();
-        dispatch(verify({ mobile, code: otp.join('') }));
+        dispatch(verify({ mobile, code: otp.join('') })).then(() => {
+            setOtp(['', '', '', '', '', '']);
+        });
     }
 
     return (
         <AuthLayout>
+            {
+                !otp.join('') && status === "error" && (
+                    <div className="error">
+                        { error }
+                    </div>
+                )
+            }
             <form onSubmit={submitOtp} className="d-flex flex-column verify-form">
                 <div className="text-center">
                     <div className="otp-sent-label">OTP Sent To</div>
-                    <div className="mobile-number">+91 - 93532318533</div>
+                    <div className="mobile-number">+91 - {mobile}</div>
                 </div>
                 <div className="d-flex otp-container justify-center" ref={otpContainer}>
                     <input className="flex-auto otp-input" maxLength="1" autoFocus onChange={onOtpInput(0)} onKeyDown={handleBackspace(0)} value={otp[0]} />

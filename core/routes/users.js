@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const express = require("express");
 const router = new express.Router();
 
@@ -6,25 +5,27 @@ const fusionService = require("../services/fusion");
 
 const { User } = require("../models/user");
 const { Transaction } = require("../models/transaction");
-const { Employee, Client } = require("../models/client");
+const { Employee, Client, Disbursal } = require("../models/client");
 
 router.post('/submit-kyc', async (req, res) => {
     const userId = req.body.userId || req.user.id;
+    // Creates new application
     const application = await fusionService.createNewApplication(req.body);
-    // Add mock card details
+    // Issues account and card
+    const bundle = await fusionService.issueBundle({
+      accountHolderID: application.individualID,
+      name: `Bucks_GigWorker_${req.body.firstName}`,
+      phone: `+91${req.body.mobile}`
+    });
+    // Fetches resource details for the payment instrument (card here)
+    const resourceDetails = await fusionService.fetchResourceDetails(bundle.paymentInstruments[0].resourceID);
+    // Update relavent info for future use
     const user = await User.findByIdAndUpdate(userId, {
-        applicationId: application.applicationId,
+        applicationID: application.applicationID,
+        individualID: application.individualID,
         name: req.body.firstName,
-        card: {
-            cardNumber: '4242 4242 4242 4242',
-            expiry: {
-                month: '12',
-                year: '25'
-            },
-            cvv: '255',
-            network: 'VISA',
-            cardHolderName: req.body.firstName
-        }
+        cardID: resourceDetails.formFactors[0].formFactorID,
+        accountID: bundle.accounts[0].accountID
     }, { new: true, });
     res.send(user);
 });
@@ -32,34 +33,49 @@ router.post('/submit-kyc', async (req, res) => {
 router.post('/summary', async (req, res) => {
     const userId = req.body.userId || req.user.id;
 
-    const [income, expense] = await Transaction.aggregate([
-        {
-          '$match': {
-            "userId": new mongoose.Types.ObjectId(userId)
-          }
-        }, {
-          '$group': {
-            '_id': '$type', 
-            'amount': {
-              '$sum': '$amount'
-            }
+    const incomes = await Disbursal.aggregate([
+      {
+        '$group': {
+          '_id': '$clientId', 
+          'income': {
+            '$sum': '$amount'
           }
         }
+      }, {
+        '$lookup': {
+          'from': 'clients', 
+          'localField': '_id', 
+          'foreignField': '_id', 
+          'as': 'clients'
+        }
+      }, {
+        '$replaceWith': {
+          'income': '$income', 
+          'client': {
+            '$mergeObjects': [
+              {
+                '$arrayElemAt': [
+                  '$clients', 0
+                ]
+              }
+            ]
+          }
+        }
+      }
     ]);
 
     const user = await User.findById(userId);
 
     res.send({
         balance: user.balance,
-        income: income ? income.amount : 0,
-        expense: expense ? expense.amount : 0,
+        incomes
     });
 });
 
 router.post('/transactions', async (req, res) => {
   const userId = req.body.userId || req.user.id;
 
-  const transactions = await Transaction.find({ userId });
+  const transactions = await Transaction.find({ userId, type: "debit" });
   
   res.send(transactions);
 });
@@ -74,4 +90,13 @@ router.post('/linked-accounts', async (req, res) => {
 
   res.send(employees);
 });
+
+router.post('/card-details', async (req, res) => {
+  const userId = req.body.userId || req.user.id;
+
+  const { cardID } = await User.findById(userId);
+  const card = await fusionService.fetchCardDetails(cardID);
+  
+  res.send(card);
+})
 module.exports = router;

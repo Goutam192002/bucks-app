@@ -21,29 +21,26 @@ export const HomeView = () => {
         <div className="d-flex flex-column home-container">
             <div className="d-flex justify-between balance-container">
                 <div>
-                    <div className="your-balance-label">Your balance</div>
+                    <div className="your-balance-label">Amount you can spend</div>
                     <div className="balance-amount">₹ {summary.balance}</div>
                 </div>
                 <img src="/assets/money.png" />
             </div>
+            <div className="income-heading">Income in last 30 days</div>
             <div className="d-flex summary-row">
-                <div className="d-flex justify-between summary-container">
-                    <div>
-                        <div className="summary-type-label">Income</div>
-                        <div className="summary-amount">₹ {summary.income}</div>
-                    </div>
-                    <img src="/assets/arrow_up.png" width="30" height="30" />
-                </div>
-                <div className="d-flex justify-between summary-container">
-                    <div>
-                        <div className="summary-type-label">Expenses</div>
-                        <div className="summary-amount">₹ {summary.expense}</div>
-                    </div>
-                    <img src="/assets/arrow_down.png" width="30" height="30" />
-                </div>
+                {
+                    summary.incomes && summary.incomes.map( 
+                        income => (
+                            <div className="d-flex flex-column summary-container">
+                                <div className="sumamry-amount">{income.client.companyName}</div>
+                                <div className="summary-amount">₹ {income.income}</div>
+                            </div>        
+                        )
+                    )
+                }
             </div>
             <div className="d-flex justify-between">
-                <div className="transactions-label">Transactions</div>
+                <div className="transactions-label">Expenses</div>
             </div>
             <div className="transactions-container">
                 {

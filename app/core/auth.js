@@ -39,13 +39,19 @@ export const authSlice = createSlice({
       state.next = action.payload.next;
     });
 
+
+    builder.addCase(verify.rejected, (state, action) => {
+      state.loading = 'error';
+      state.error = action.payload;
+    });
+
     builder.addCase(submitKyc.fulfilled, (state, action) => {
       state.next = '/';
     });
 
     builder.addCase(getNextRoute.fulfilled, (state, action) => {
       state.next = action.payload.next;
-    })
+    });
   }
 })
 

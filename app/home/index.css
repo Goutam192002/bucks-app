@@ -48,8 +48,9 @@
 .summary-amount {
     font-style: normal;
     font-weight: bold;
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 21px;
+    line-height: 24px;
+    padding: 4px;
 }
 
 .transactions-label {
@@ -121,4 +122,11 @@
     flex: 1;
     max-height: 80px;
     overflow-y: scroll;
+}
+
+.income-heading {
+    margin-top: 21px;
+    margin-bottom: 4px;
+    font-size: 15px;
+    font-weight: bold;
 }

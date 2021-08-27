@@ -1,25 +1,14 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const expirySchema = new Schema({
-    month: String,
-    year: String
-}, { _id: false });
-
-const cardSchema = new Schema({
-    cardNumber: String,
-    expiry: expirySchema,
-    network: String,
-    cardStatus: String,
-    cvv: String,
-    cardHolderName: String,
-}, { _id: false });
-
 const userSchema = new Schema({
     name: String,
     mobile: String,
     role: String,
-    applicationId: String,
+    applicationID: String,
+    individualID: String,
+    cardID: String,
+    accountID: String,
     mobile_verified: {
         type: Boolean,
         default: false
@@ -27,10 +16,6 @@ const userSchema = new Schema({
     active: {
         type: Boolean,
         default: false
-    },
-    card: {
-        type: cardSchema,
-        default: {}
     },
     balance: {
         type: Number,

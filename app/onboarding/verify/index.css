@@ -40,3 +40,8 @@
     padding: 8px;
     margin-bottom: 36px;
 }
+
+.error {
+    color: red;
+    text-align: center;
+}

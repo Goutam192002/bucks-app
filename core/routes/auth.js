@@ -19,9 +19,9 @@ router.post('/', async (req, res) => {
     user = await User.findOne({ mobile });
     if (user) {
         logged = true;
-        if (user.mobile_verified && !user.applicationId) {
+        if (user.mobile_verified && !user.applicationID) {
             next = '/onboarding/submit-kyc';            
-        } else if (user.mobile_verified && user.applicationId) {
+        } else if (user.mobile_verified && user.applicationID) {
             next = '/';
         }
     } else {
@@ -45,10 +45,14 @@ router.post('/verify', async (req, res, next) => {
             mobile_verified: true,
             active: true,
         }, { new: true });
+        let next = '/';
+        if (!user.applicationID) {
+            next = '/onboarding/submit-kyc';
+        }
         return res.send({
             user,
-            next: '/onboarding/sync-accounts',
-            logged: true,
+            next,
+            logged: true
         });
     } 
     res.status(400).send({
@@ -65,7 +69,7 @@ router.post('/next', async (req, res) => {
 
     let next = '/onboarding/submit-kyc';
 
-    if (user.applicationId) {
+    if (user.applicationID) {
         next = '/';
     }
 
